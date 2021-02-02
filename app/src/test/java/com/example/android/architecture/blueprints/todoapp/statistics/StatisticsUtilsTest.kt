@@ -1,6 +1,7 @@
 package com.example.android.architecture.blueprints.todoapp.statistics
 
 import com.example.android.architecture.blueprints.todoapp.data.Task
+import org.hamcrest.core.Is.`is`
 import org.junit.Assert.*
 import org.junit.Test
 
@@ -11,8 +12,8 @@ class StatisticsUtilsTest {
             Task("task 1", "description taks 1", isCompleted = false)
         )
         val result = getActiveAndCompletedStats(tasks)
-        assertEquals(0f, result.completedTasksPercent)
-        assertEquals(100f, result.activeTasksPercent)
+        assertThat(result.completedTasksPercent, `is`(0f))
+        assertThat(result.activeTasksPercent, `is`(100f))
     }
 
     @Test
@@ -25,23 +26,23 @@ class StatisticsUtilsTest {
             Task("task 5", "description taks 5", isCompleted = false),
         )
         val result = getActiveAndCompletedStats(tasks)
-        assertEquals(40f, result.completedTasksPercent)
-        assertEquals(60f, result.activeTasksPercent)
+        assertThat(result.completedTasksPercent, `is`(40f))
+        assertThat(result.activeTasksPercent, `is`(60f))
     }
 
     @Test
     fun given_empty_task_list_when_get_active_and_completed_then_active_and_completed_should_be_zero() {
         val tasks = emptyList<Task>()
         val result = getActiveAndCompletedStats(tasks)
-        assertEquals(0f, result.completedTasksPercent)
-        assertEquals(0f, result.activeTasksPercent)
+        assertThat(result.completedTasksPercent, `is`(0f))
+        assertThat(result.activeTasksPercent, `is`(0f))
     }
 
     @Test
     fun given_null_task_list_when_get_active_and_completed_then_active_and_completed_should_be_zero() {
         val tasks = null
         val result = getActiveAndCompletedStats(tasks)
-        assertEquals(0f, result.completedTasksPercent)
-        assertEquals(0f, result.activeTasksPercent)
+        assertThat(result.completedTasksPercent, `is`(0f))
+        assertThat(result.activeTasksPercent, `is`(0f))
     }
 }
