@@ -31,6 +31,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    testOptions.unitTests {
+        // https://developer.android.com/reference/tools/gradle-api/4.1/com/android/build/api/dsl/UnitTestOptions#isincludeandroidresources
+        includeAndroidResources true
+    }
 }
 
 dependencies {
@@ -62,6 +66,16 @@ dependencies {
     // Dependencies for local unit tests
     testImplementation "junit:junit:$junitVersion"
     testImplementation "org.hamcrest:hamcrest-all:$hamcrestVersion"
+    testImplementation "androidx.test:core-ktx:$androidXTestCoreVersion"
+
+    // Required to use AndroidJUnit4
+    testImplementation "androidx.test.ext:junit-ktx:$androidXTestExtKotlinRunnerVersion"
+
+    // Required so AndroidX tests can delegate to Robolectric to simulate Android context to use in local unit tests
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
+
+    // Required to use InstantTaskExecutor, so we can properly test LiveData in our local unit tests
+    testImplementation "androidx.arch.core:core-testing:$archTestingVersion"
 
     // AndroidX Test - Instrumented testing
     androidTestImplementation "androidx.test.ext:junit:$androidXTestExtKotlinRunnerVersion"
