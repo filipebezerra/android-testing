@@ -4,29 +4,42 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.android.architecture.blueprints.todoapp.getOrAwaitValue
-import org.hamcrest.CoreMatchers.not
-import org.hamcrest.CoreMatchers.nullValue
+import org.hamcrest.CoreMatchers.*
 import org.junit.Assert.assertThat
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class TasksViewModelTest {
-
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    @Test
-    fun given_user_when_clicked_on_fab_then_navigate_to_add_edit_task_screen() {
-        // Given a fresh TasksViewModel
-        val tasksViewModel = TasksViewModel(ApplicationProvider.getApplicationContext())
+    private lateinit var tasksViewModel: TasksViewModel
 
+    @Before
+    fun setupViewModel() {
+        tasksViewModel = TasksViewModel(ApplicationProvider.getApplicationContext())
+    }
+
+    @Test
+    fun addNewTask_setsNewTaskEvent() {
         // When adding a new Task
         tasksViewModel.addNewTask()
 
         // Then the new task event is triggered
-        val eventValue = tasksViewModel.newTaskEvent.getOrAwaitValue()
-        assertThat(eventValue.getContentIfNotHandled(), not(nullValue()))
+        val newTaskEvent = tasksViewModel.newTaskEvent.getOrAwaitValue().getContentIfNotHandled()
+        assertThat(newTaskEvent, not(nullValue()))
+    }
+
+    @Test
+    fun setFilterAllTasks_tasksAddViewVisible() {
+        // When the filter type is ALL_TASKS
+        tasksViewModel.setFiltering(TasksFilterType.ALL_TASKS)
+
+        // Then the "Add task" action is visible
+        val addTaskIsVisible = tasksViewModel.tasksAddViewVisible.getOrAwaitValue()
+        assertThat(addTaskIsVisible, `is`(true))
     }
 }

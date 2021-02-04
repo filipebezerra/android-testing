@@ -66,9 +66,11 @@ dependencies {
     // Dependencies for local unit tests
     testImplementation "junit:junit:$junitVersion"
     testImplementation "org.hamcrest:hamcrest-all:$hamcrestVersion"
+
+    // Required to use ApplicationProvider and get Android context for our local unit tests
     testImplementation "androidx.test:core-ktx:$androidXTestCoreVersion"
 
-    // Required to use AndroidJUnit4
+    // Required to use AndroidJUnit4 runner
     testImplementation "androidx.test.ext:junit-ktx:$androidXTestExtKotlinRunnerVersion"
 
     // Required so AndroidX tests can delegate to Robolectric to simulate Android context to use in local unit tests
