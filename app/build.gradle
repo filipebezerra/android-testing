@@ -79,6 +79,9 @@ dependencies {
     // Required to use InstantTaskExecutor, so we can properly test LiveData in our local unit tests
     testImplementation "androidx.arch.core:core-testing:$archTestingVersion"
 
+    // Required to test Coroutines in synchronous blocks
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+
     // AndroidX Test - Instrumented testing
     androidTestImplementation "androidx.test.ext:junit:$androidXTestExtKotlinRunnerVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
