@@ -84,6 +84,9 @@ dependencies {
 
     // AndroidX Test - Instrumented testing
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "androidx.test.ext:junit:$androidXTestExtKotlinRunnerVersion"
+
+    debugImplementation "androidx.fragment:fragment-testing:$fragmentVersion"
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
