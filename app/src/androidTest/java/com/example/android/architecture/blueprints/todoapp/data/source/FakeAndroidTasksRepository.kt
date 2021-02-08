@@ -7,7 +7,7 @@ import com.example.android.architecture.blueprints.todoapp.data.Result
 import com.example.android.architecture.blueprints.todoapp.data.Task
 import kotlinx.coroutines.runBlocking
 
-class FakeTasksRepository : TasksRepository {
+class FakeAndroidTasksRepository : TasksRepository {
     var taskServiceData: LinkedHashMap<String, Task> = LinkedHashMap()
 
     private val observableTasks = MutableLiveData<Result<List<Task>>>()

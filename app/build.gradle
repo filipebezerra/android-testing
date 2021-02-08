@@ -38,7 +38,6 @@ android {
 }
 
 dependencies {
-
     // App dependencies
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "androidx.cardview:cardview:$cardVersion"
@@ -85,6 +84,11 @@ dependencies {
     // AndroidX Test - Instrumented testing
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidXTestExtKotlinRunnerVersion"
+    // To fix: More than one file was found with OS independent path 'META-INF/AL2.0'
+    // https://github.com/Kotlin/kotlinx.coroutines/issues/2023
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion") {
+        exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
+    }
 
     debugImplementation "androidx.fragment:fragment-testing:$fragmentVersion"
 
