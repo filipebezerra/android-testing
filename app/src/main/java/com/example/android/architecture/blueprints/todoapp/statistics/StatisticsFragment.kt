@@ -24,21 +24,21 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.android.architecture.blueprints.todoapp.R
 import com.example.android.architecture.blueprints.todoapp.databinding.StatisticsFragBinding
+import com.example.android.architecture.blueprints.todoapp.util.getViewModelFactory
 import com.example.android.architecture.blueprints.todoapp.util.setupRefreshLayout
 
 /**
  * Main UI for the statistics screen.
  */
 class StatisticsFragment : Fragment() {
-
     private lateinit var viewDataBinding: StatisticsFragBinding
 
-    private val viewModel by viewModels<StatisticsViewModel>()
+    private val viewModel by viewModels<StatisticsViewModel>{ getViewModelFactory() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         viewDataBinding = DataBindingUtil.inflate(
             inflater, R.layout.statistics_frag, container,
             false
