@@ -19,6 +19,9 @@ class FakeTasksRepository : TasksRepository {
     }
 
     override suspend fun getTasks(forceUpdate: Boolean): Result<List<Task>> {
+        if (shouldReturnError) {
+            return Result.Error(Exception("Test exception"))
+        }
         return Result.Success(taskServiceData.values.toList())
     }
 
