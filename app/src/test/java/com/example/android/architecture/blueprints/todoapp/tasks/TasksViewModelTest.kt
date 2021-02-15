@@ -1,16 +1,28 @@
 package com.example.android.architecture.blueprints.todoapp.tasks
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.example.android.architecture.blueprints.todoapp.MainCoroutineRule
+import com.example.android.architecture.blueprints.todoapp.R
 import com.example.android.architecture.blueprints.todoapp.data.Task
 import com.example.android.architecture.blueprints.todoapp.data.source.FakeTasksRepository
 import com.example.android.architecture.blueprints.todoapp.getOrAwaitValue
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
 import org.hamcrest.CoreMatchers.*
+import org.junit.After
 import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
+@ExperimentalCoroutinesApi
 class TasksViewModelTest {
+    @get:Rule
+    val mainCoroutineRule = MainCoroutineRule()
+
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
@@ -45,5 +57,22 @@ class TasksViewModelTest {
         // Then the "Add task" action is visible
         val addTaskIsVisible = tasksViewModel.tasksAddViewVisible.getOrAwaitValue()
         assertThat(addTaskIsVisible, `is`(true))
+    }
+
+    @Test
+    fun completedTask_dataAndSnackbarUpdate() {
+        // GIVEN - Active task
+        val task = Task("Waking Up Boot", "Wake and and exercise")
+        tasksRepository.addTasks(task)
+
+        // WHEN - Task is completed
+        tasksViewModel.completeTask(task, true)
+
+        // THEN - Task should be marked as completed
+        assertThat(tasksRepository.taskServiceData[task.id]?.isCompleted, `is`(true))
+
+        // THEN - Snackbar should be updated
+        val snackbarText = tasksViewModel.snackbarText.getOrAwaitValue()
+        assertThat(snackbarText.getContentIfNotHandled(), `is`(R.string.task_marked_complete))
     }
 }
