@@ -96,6 +96,7 @@ dependencies {
     androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion") {
         exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
     }
+    androidTestImplementation "androidx.arch.core:core-testing:$archTestingVersion"
 
     debugImplementation "androidx.fragment:fragment-testing:$fragmentVersion"
 
