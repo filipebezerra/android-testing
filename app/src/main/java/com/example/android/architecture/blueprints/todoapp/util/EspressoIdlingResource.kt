@@ -1,16 +1,25 @@
 package com.example.android.architecture.blueprints.todoapp.util
 
-import androidx.test.espresso.idling.CountingIdlingResource
+import androidx.test.espresso.IdlingResource
 
+/**
+ * Contains a static reference to [IdlingResource], only available in the 'mock' build type.
+ */
 object EspressoIdlingResource {
     private const val RESOURCE = "GLOBAL"
 
     @JvmField
-    val countingIdlingResource = CountingIdlingResource(RESOURCE)
+    val countingIdlingResource = SimpleCountingIdlingResource(RESOURCE)
 
-    fun increment() = countingIdlingResource.increment()
+    fun increment() {
+        countingIdlingResource.increment()
+    }
 
-    fun decrement() = with(countingIdlingResource) { isIdleNow.takeIf { false }?.let { decrement() } }
+    fun decrement() {
+        if (!countingIdlingResource.isIdleNow) {
+            countingIdlingResource.decrement()
+        }
+    }
 }
 
 inline fun <T> wrapEspressoIdlingResource(function: () -> T): T {

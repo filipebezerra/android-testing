@@ -39,7 +39,7 @@ class TaskDetailFragmentTest {
         val activeTask = Task(
             title = "Do something",
             description = "Something really fun",
-            isCompleted = false,
+            isCompleted = false
         )
         tasksRepository.saveTask(activeTask)
 
@@ -64,7 +64,7 @@ class TaskDetailFragmentTest {
         val completedTask = Task(
             title = "Something done",
             description = "Something really nice",
-            isCompleted = true,
+            isCompleted = true
         )
         tasksRepository.saveTask(completedTask)
 

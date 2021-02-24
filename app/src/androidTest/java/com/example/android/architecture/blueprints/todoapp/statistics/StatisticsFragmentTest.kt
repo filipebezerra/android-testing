@@ -41,7 +41,7 @@ class StatisticsFragmentTest {
         listOf(
             Task("Task 1", "Do something fun", true, "id1"),
             Task("Task 2", "Do something new", true, "id2"),
-            Task("Task 3", "Do something repeated", true, "id3"),
+            Task("Task 3", "Do something repeated", true, "id3")
         ).forEach { tasksRepository.saveTask(it) }
 
         // WHEN - Statistics fragment launched to display statistics
@@ -78,7 +78,7 @@ class StatisticsFragmentTest {
         listOf(
             Task("Task 1", "Do something fun", false, "id1"),
             Task("Task 2", "Do something new", false, "id2"),
-            Task("Task 3", "Do something repeated", false, "id3"),
+            Task("Task 3", "Do something repeated", false, "id3")
         ).forEach { tasksRepository.saveTask(it) }
 
         // WHEN - Statistics fragment launched to display statistics
@@ -116,7 +116,7 @@ class StatisticsFragmentTest {
             Task("Task 1", "Do something fun", true, "id1"),
             Task("Task 2", "Do something new", true, "id2"),
             Task("Task 3", "Do something repeated", false, "id3"),
-            Task("Task 4", "Do something dangerous", false, "id4"),
+            Task("Task 4", "Do something dangerous", false, "id4")
         ).forEach { tasksRepository.saveTask(it) }
 
         // WHEN - Statistics fragment launched to display statistics
